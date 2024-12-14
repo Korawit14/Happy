@@ -4,78 +4,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Birthday Card</title>
     <!-- Google Font-->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="style1.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style1.css" />
+    <style>
+      body {
+        background-color: #f9f9f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .card {
+        width: 300px;
+        height: 400px;
+        perspective: 1000px;
+        cursor: pointer;
+      }
+
+      .outside {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 1s;
+        transform-style: preserve-3d;
+      }
+
+      .front, .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      .front {
+        background-color: #ffcbcb;
+        font-family: 'Mitr', sans-serif;
+        font-size: 20px;
+        color: #333;
+        text-align: center;
+      }
+
+      .back {
+        background-color: #fff;
+        transform: rotateY(180deg);
+        text-align: center;
+        padding: 20px;
+        font-family: 'Mitr', sans-serif;
+        font-size: 18px;
+        color: #333;
+        line-height: 1.5;
+      }
+
+      .candle {
+        width: 15px;
+        height: 50px;
+        background: linear-gradient(to bottom, #f9a825, #f57f17);
+        margin: 20px auto 0;
+        position: relative;
+      }
+
+      .candle:before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 8px;
+        height: 10px;
+        background: #ffc107;
+        border-radius: 50%;
+        box-shadow: 0 0 5px #ffc107, 0 0 10px #ffc107;
+      }
+
+      .inside {
+        background: linear-gradient(to right, #e7e7e7, #ffffff 30%);
+        line-height: 1.8;
+        text-align: center;
+        padding: 15px;
+        font-size: 16px;
+      }
+    </style>
   </head>
   <body>
-    <div class="card">
+    <div class="card" id="birthdayCard">
       <div class="outside">
         <div class="front">
-          <p>Happy Birthday</p>
-          <div class="cake">
-            <div class="top-layer"></div>
-            <div class="middle-layer"></div>
-            <div class="bottom-layer"></div>
-            <div class="candle"></div>
-          </div>
+          <p>Happy Birthday!</p>
+          <div class="candle"></div>
         </div>
-        <div class="back"></div>
+        <div class="back">
+          <p>สุขสันต์วันเกิดนะครับแม่ตุ๊ก 🎉</p>
+          <p>ขอให้มีสุขภาพแข็งแรงและมีความสุขทุกวัน!</p>
+        </div>
       </div>
-      <div class="inside">
-        <p>สุขสันต์วันเกิดนะครับแม่ตุ๊ก วันเกิดปีนี้ขอให้แม่ตุ๊กมีความสุขมาก ๆ สุขภาพร่างกายแข็งแรง กินข้าวให้อิ่ม นอนให้หลับ พักผ่อนให้เพียงพอ ไม่มีเรื่องที่ทุกข์ใจ ไม่เครียดกับงาน ขอให้แม่ตุ๊กพบเจอแต่สิ่งที่ดี ๆ อยู่กับแซมไปนาน ๆ นะครับ</p>
-        <img class="img" src="./Untitled design (1).png" alt="">
-      </div>
-      <div class="firework" id="firework1">
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-      </div>
-      <div class="firework" id="firework2">
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-      </div>
-      <div class="firework" id="firework3">
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-        <div class="explosion"></div>
-      </div>
-    
-      
-    
-  </body>
+    </div>
 
+    <script>
+      const card = document.getElementById("birthdayCard");
+      const outside = card.querySelector(".outside");
+
+      // Toggle card flip on click or touch
+      card.addEventListener("click", () => {
+        outside.style.transform = outside.style.transform === "rotateY(180deg)" 
+          ? "rotateY(0deg)" 
+          : "rotateY(180deg)";
+      });
+
+      // Optional: Support touch events for mobile devices
+      card.addEventListener("touchstart", () => {
+        outside.style.transform = outside.style.transform === "rotateY(180deg)" 
+          ? "rotateY(0deg)" 
+          : "rotateY(180deg)";
+      });
+    </script>
+  </body>
+</html>

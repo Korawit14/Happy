@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Card with Single-Tier Cake</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #ffe9e9, #ffc1c1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .card {
+            position: relative;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            padding: 20px;
+            max-width: 90%;
+            z-index: 1;
+        }
+
+        .card h1 {
+            color: #0059ff;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .card .message {
+            color: #333;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .cake-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .tier {
+            position: relative;
+            background: #61a5ff;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            width: 70%;
+            max-width: 250px;
+            height: 80px;
+        }
+
+        .candle {
+            position: absolute;
+            width: 8px;
+            height: 30px;
+            background: #ffe57f;
+            border-radius: 5px;
+            top: -50px;
+        }
+
+        .candle:nth-child(1) { left: 20%; }
+        .candle:nth-child(2) { left: 45%; }
+        .candle:nth-child(3) { left: 70%; }
+
+        .flame {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 12px;
+            background: radial-gradient(circle, rgba(255,255,0,1) 0%, rgba(255,69,0,1) 70%, rgba(255,255,255,0) 100%);
+            border-radius: 50%;
+            animation: flicker 0.5s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1); opacity: 1; }
+            100% { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
+        }
+
+    </style>
+</head>
+<body>
+    <canvas id="fireworks"></canvas>
+    <div class="card">
+        <h1>Happy Birthday!</h1>
+        <p class="message"></p>
+        <br><br><br>
+        <div class="cake-container">
+            <div class="tier">
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('fireworks');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+
+        function createFirework(x, y) {
+            for (let i = 0; i < 50; i++) {
+                particles.push({
+                    x,
+                    y,
+                    angle: Math.random() * 2 * Math.PI,
+                    speed: Math.random() * 3 + 1,
+                    radius: Math.random() * 3 + 1,
+                    opacity: 1
+                });
+            }
+        }
+
+        function drawFireworks() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles = particles.filter(p => p.opacity > 0);
+
+            for (let p of particles) {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI);
+                ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+                ctx.fill();
+                p.x += Math.cos(p.angle) * p.speed;
+                p.y += Math.sin(p.angle) * p.speed;
+                p.opacity -= 0.02;
+            }
+        }
+
+        function sparkleEffect() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * window.innerWidth + 'px';
+            sparkle.style.top = Math.random() * window.innerHeight + 'px';
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => sparkle.remove(), 1500);
+        }
+
+        setInterval(() => {
+            createFirework(Math.random() * canvas.width, Math.random() * canvas.height);
+            sparkleEffect();
+        }, 500);
+
+        function animate() {
+            drawFireworks();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+    <!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ใช้ <a> เชื่อมโยงไปยังหน้าถัดไป -->
+    <a href="index1.html">
+        <button class="next-button">Next</button>
+    </a>
+</body>
+</html>
+
+    
+
+</body>
+</html>

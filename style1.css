@@ -19,6 +19,7 @@
     -webkit-perspective: 1200px;
     perspective: 1200px;
     transition: 1s;
+    cursor: pointer;
   }
   .card:hover {
     transform: rotate(-5deg);
